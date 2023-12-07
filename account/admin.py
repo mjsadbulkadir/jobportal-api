@@ -1,5 +1,5 @@
 from django.contrib import admin
-from account.models import EducationInfo, ExperienceInfo, SkillsInfo, User, PersonalInfo
+from account.models import EducationInfo, ExperienceInfo, SkillsInfo, User, PersonalInfo,Skillsfield
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 # Register your models here.
 
@@ -46,6 +46,10 @@ class EducationAdmin(admin.ModelAdmin):
 class ExperienceAdmin(admin.ModelAdmin):
     list_display=['user','company_name','year_of_experience','joining_date','resigning_date','job_role']
     
-@admin.register(SkillsInfo)
+@admin.register(Skillsfield)
 class SkillsAdmin(admin.ModelAdmin):
-    list_display=['id','user','name','description']
+    list_display=['id','skills']
+    
+@admin.register(SkillsInfo)
+class SkillsInfoAdmin(admin.ModelAdmin):
+    list_display=['id','user','Skill']

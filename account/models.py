@@ -107,13 +107,25 @@ class ExperienceInfo(models.Model):
     resigning_date = models.DateField()
     job_role = models.CharField(max_length=100)
     
-class SkillsInfo(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50, default='Default Name')  # Add default value here
-    description = models.CharField(max_length=100, default='Default Description')
-
+class Skillsfield(models.Model):
+    skills = models.CharField(max_length=20)
+    
     def __str__(self):
-        return self.name
+        return self.skills    
+
+    
+class SkillsInfo(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    skill_field = models.ManyToManyField(Skillsfield)
+    
+    def Skill(self):
+        return ", ".join([str(p) for p in self.skill_field.all()])
+    
+    # name = models.CharField(max_length=50, default='Default Name')  
+    # description = models.CharField(max_length=100, default='Default Description')
+
+    # def __str__(self):
+    #     return self.user
     
     # upload image by using signals
     
